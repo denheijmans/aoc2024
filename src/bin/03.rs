@@ -13,7 +13,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     let total: u32 = input
         .split("do()")
         .map(|x| x.split("don't()").next().unwrap())
-        .map(|x| multiply(x))
+        .map(multiply)
         .sum();
     Some(total)
 }
@@ -22,8 +22,7 @@ fn multiply(input: &str) -> u32 {
     input
         .split("mul")
         .skip(1)
-        .map(|x| mult(x).ok())
-        .filter_map(|x| x)
+        .filter_map(|x| mult(x).ok())
         .map(|(_, (x, y))| x * y)
         .sum()
 }
